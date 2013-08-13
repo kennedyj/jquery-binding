@@ -1,0 +1,37 @@
+<script>
+  my_model = {
+    somefield: "test",
+    otherfield: "garbage",
+    myobject: {
+      somefield: "other data",
+      password: "super secret"
+    }
+  }
+</script>
+
+<p data-model="my_model" data-model-field="somefield"></p>
+
+<form>
+  <input type="text" data-model="my_model" data-model-field="somefield" />
+  <input type="text" data-model-field"my_model.otherfield" />
+</form>
+
+<form>
+  <input type="text" data-model="my_model" data-model-field="somefield" />
+  <input type="text" data-model-field"my_model.otherfield" />
+</form>
+
+<form>
+  <input type="text" data-model="my_model" data-model-field="somefield" />
+  <input type="text" data-model-field"my_model.otherfield" />
+</form>
+
+<form>
+  <input type="text" data-model="my_model" data-model-field="somefield" />
+  <input type="text" data-model-field"my_model.otherfield" />
+</form>
+
+<form>
+  <input type="text" data-model="my_model.myobject" data-model-field="somefield" />
+  <input type="text" data-model-field"my_model.otherfield" />
+</form>
