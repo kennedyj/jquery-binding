@@ -30,7 +30,7 @@ jQBind.Model = (function ($) {
     var
       self = this,
       defaults = {
-        el: "div"
+        el: "<div>"
       };
 
     // Merge options
@@ -61,14 +61,16 @@ jQBind.Model = (function ($) {
   // Trigger
   // .trigger("eventName" [, data]) => NS + ":eventName" gets triggered
   Model.prototype.trigger = function () {
-    this.$el.trigger.call(this.$el, NS + ":" + Array.prototype.shift.call(arguments), arguments);
+    var ev = Array.prototype.shift.call(arguments);
+    this.$el.trigger(NS + ":" + ev, arguments);
     return this;
   };
 
   // Event listening "On"
   Model.prototype.on = function (ev, fn, context) {
     var self = this;
-    this.$el.on(NS + ":" + ev, function () {
+    this.$el.on(NS + ":" + ev, function (evt) {
+      evt.stopPropagation();
       fn.apply(context || self, arguments);
     });
   };
@@ -110,19 +112,21 @@ jQBind.Model = (function ($) {
   };
 
   // Set value
-  Model.prototype.set = function (keyStr, value) {
+  Model.prototype.set = function (keyStr, value, silent) {
     var
       root = this.getValueObj(keyStr),
       key = this.getKeyFromStr(keyStr);
     if (root) {
       root[key] = value;
+      if (!silent) {
 
-      // Trigger change
-      this.trigger("change", [{
-        value: value,
-        key: key,
-        keyStr: keyStr
-      }, this]);
+        // Trigger change
+        this.trigger("change", [{
+          value: value,
+          key: key,
+          keyStr: keyStr
+        }, this]);
+      }
       return this;
     } else {
       // Throw error

@@ -4,7 +4,34 @@
   <title>jQuery Data Binding</title>
 </head>
 <body>
+
+  <label>Name1: <span data-model-field="userData.name"></span><br />
+  <input name="name1" data-model-field="userData.name" />
+  </label><br />
+  <label>Name2: <span data-model-field="userData.name"></span><br />
+  <input name="name2" data-model-field="userData.name" />
+  </label><br />
+  <label>Name3: <span data-model-field="userData.name"></span><br />
+  <textarea name="name3" data-model-field="userData.name"></textarea>
+  </label><br />
+
+  <label>Email1: <span data-model-field="userData.email"></span><br />
+  <input data-model-field="userData.email" />
+  </label><br />
+  <label>Email2: <span data-model-field="userData.email"></span><br />
+  <input data-model-field="userData.email" />
+  </label><br />
+  <label>Email3: <span data-model-field="userData.email"></span><br />
+  <input data-model-field="userData.email" />
+  </label>
   <script src="lib/jquery.min.js"></script>
+  <script src="js/classes/Utils.js"></script>
   <script src="js/classes/Model.js"></script>
+  <script src="js/classes/Listener.js"></script>
+  <script>
+    (function () {
+      var listener = new jQBind.Listener();
+    }());
+  </script>
 </body>
 </html>
