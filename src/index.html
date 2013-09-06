@@ -25,12 +25,28 @@
   <input data-model-field="userData.email" />
   </label>
   <script src="lib/jquery.min.js"></script>
+  <script src="js/classes/DOMNode.js"></script>
   <script src="js/classes/Utils.js"></script>
   <script src="js/classes/Model.js"></script>
-  <script src="js/classes/Listener.js"></script>
+  <script src="js/classes/View.js"></script>
   <script>
     (function () {
-      var listener = new jQBind.Listener();
+      "use strict";
+
+      // Create model
+      jQBind.Utils.addModel("userData");
+      
+      // Create views for all 'data-model-field' elems
+      $("[data-model-field]").each(function (index, el) {
+        $(el).data("jQBindView", new jQBind.View({
+          el: el,
+          evt: "keyup"
+        }));
+
+        var node = new jQBind.DOMNode({
+          el: el
+        });
+      });
     }());
   </script>
 </body>
